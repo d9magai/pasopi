@@ -4,6 +4,7 @@ import binascii
 import os
 import nfc
 import gspread
+import pygame
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
 from datetime import timedelta, tzinfo
@@ -16,6 +17,8 @@ import Queue
 active = True
 q = Queue.Queue()
 clf = nfc.ContactlessFrontend('usb')
+pygame.mixer.init()
+pygame.mixer.music.load(u"button01b.mp3")
 
 f = open('doc_id')
 doc_id = f.readline().strip()
@@ -44,7 +47,8 @@ def get_data():
 def wait_on_user():
     while True:
         clf.connect(rdwr={'on-connect': connected})
-        sleep(0.5)
+        pygame.mixer.music.play(1)
+        sleep(1)
 
 th1 = Thread(target=get_data)
 th1.start()
