@@ -35,7 +35,7 @@ def ByteToHex(byteStr):
 
 def connected(tag):
     pprint(vars(tag))
-    row = [timezone('Asia/Tokyo').localize(datetime.now()).isoformat(), ByteToHex(tag.idm)]
+    row = [(datetime.utcnow() + timedelta(hours=9)).strftime('%Y-%m-%d %H:%M:%S'), ByteToHex(tag.idm)]
     global q
     q.put(row)
 
