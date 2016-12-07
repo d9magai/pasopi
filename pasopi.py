@@ -5,6 +5,7 @@ import os
 import nfc
 import gspread
 import pygame
+import json
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
 from datetime import timedelta, tzinfo
@@ -19,6 +20,7 @@ q = Queue.Queue()
 clf = nfc.ContactlessFrontend('usb')
 pygame.mixer.init()
 pygame.mixer.music.load(u"button01b.mp3")
+data = json.load(open("users.json"))
 
 f = open('doc_id')
 doc_id = f.readline().strip()
