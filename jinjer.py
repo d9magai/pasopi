@@ -28,7 +28,7 @@ class Jinjer:
         res = pat.search(s);
         print(res.group(1))
         self.csrftoken = res.group(1)
-        s = self.japi('https://kintai.jinjer.biz/v1/sign_in',{'email': u,'password': p})
+        s = self.japi('https://kintai.jinjer.biz/v1/sign_in',{'email': self.email,'password': self.password})
         j = json.loads(s)
         print(j)
         self.apitoken = j['data']['token']
