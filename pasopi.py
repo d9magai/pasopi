@@ -14,6 +14,7 @@ from pytz import timezone
 from threading import Thread
 from time import sleep
 import Queue
+import jinjer
 
 active = True
 q = Queue.Queue()

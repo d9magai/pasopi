@@ -49,10 +49,3 @@ class Jinjer:
         print(s)
         
 
-data = json.load(open("users.json"))
-u, p = data['xxxx']['mailaddress'],data['xxx']['password']
-jinjer = Jinjer(u,p)
-jinjer.login()
-jinjer.checkIn()
-#jinjer.checkOut()
-
