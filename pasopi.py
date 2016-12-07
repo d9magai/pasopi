@@ -45,7 +45,8 @@ def connected(tag):
 def get_data(users):
     while True:
         if not q.empty() :
-            worksheet.append_row(q.get())
+            row = q.get()
+            worksheet.append_row(row)
             jinjerObj = jinjer.Jinjer(users[row[1]]['mailaddess'], users[row[1]]['password'])
             jinjerObj.login()
             jinjerObj.checkOut()
