@@ -21,7 +21,7 @@ q = Queue.Queue()
 clf = nfc.ContactlessFrontend('usb')
 pygame.mixer.init()
 pygame.mixer.music.load(u"button01b.mp3")
-data = json.load(open("users.json"))
+users = json.load(open("users.json"))
 
 f = open('doc_id')
 doc_id = f.readline().strip()
@@ -42,10 +42,13 @@ def connected(tag):
     global q
     q.put(row)
 
-def get_data():
+def get_data(users):
     while True:
         if not q.empty() :
             worksheet.append_row(q.get())
+            jinjerObj = jinjer.Jinjer(users[row[1]]['mailaddess'], users[row[1]]['password'])
+            jinjerObj.login()
+            jinjerObj.checkOut()
 
 def wait_on_user():
     while True:
@@ -53,7 +56,7 @@ def wait_on_user():
         pygame.mixer.music.play(1)
         sleep(1)
 
-th1 = Thread(target=get_data)
+th1 = Thread(target=get_data, args=(users,))
 th1.start()
 th2 = Thread(target=wait_on_user)
 th2.start()
