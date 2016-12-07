@@ -47,7 +47,7 @@ def get_data(users):
         if not q.empty() :
             row = q.get()
             worksheet.append_row(row)
-            jinjerObj = jinjer.Jinjer(users[row[1]]['mailaddess'], users[row[1]]['password'])
+            jinjerObj = jinjer.Jinjer(users[row[1]]['mailaddress'], users[row[1]]['password'])
             jinjerObj.login()
             jinjerObj.checkOut()
 
