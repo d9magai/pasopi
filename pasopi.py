@@ -38,7 +38,7 @@ def ByteToHex(byteStr):
 
 def connected(tag):
     pprint(vars(tag))
-    row = [(datetime.utcnow() + timedelta(hours=9)).strftime('%Y-%m-%d %H:%M:%S'), ByteToHex(tag.idm)]
+    row = [(datetime.utcnow() + timedelta(hours=9)), ByteToHex(tag.idm)]
     global q
     q.put(row)
 
@@ -46,10 +46,13 @@ def get_data(users):
     while True:
         if not q.empty() :
             row = q.get()
-            worksheet.append_row(row)
+            worksheet.append_row([row[0].strftime('%Y-%m-%d %H:%M:%S'), row[1]])
             jinjerObj = jinjer.Jinjer(users[row[1]]['mailaddress'], users[row[1]]['password'])
             jinjerObj.login()
-            jinjerObj.checkOut()
+            if (row[0] < datetime(datetime.today().year, datetime.today().month, datetime.today().day, 15, 0, 0)) :
+                jinjerObj.checkIn()
+            else :
+                jinjerObj.checkOut()
 
 def wait_on_user():
     while True:
